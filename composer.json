@@ -1,0 +1,15 @@
+{
+    "name": "hp/uk-blog",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Hp\\UkBlog\\": "src/",
+            "CustomRouter\\": "src/",
+            "App\\": "app/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "ukingsley/customrouter": "^1.0"
+    }
+}
