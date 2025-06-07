@@ -29,6 +29,11 @@ class DB
         }
     }
 
+    public function closeConnection()
+    {
+        $this->conn = null;
+    }
+
     public function connection() //establishes a connection
     {
         if (!isset($this->conn)) {
