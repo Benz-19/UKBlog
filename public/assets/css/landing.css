@@ -64,7 +64,17 @@ h1 {
 .menu-btn,
 .menu-btn-content {
     display: none;
+    text-align: center;
 }
+
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
 
 @media screen and (max-width:700px) {
     nav ul {
@@ -75,6 +85,7 @@ h1 {
     .menu-btn {
         display: block;
         text-align: center;
+        margin-left: 40px;
     }
 
     .nav-links a,
@@ -82,10 +93,11 @@ h1 {
         display: none;
     }
 
+    /*
     .menu-btn-content {
         display: block;
 
-    }
+    } */
 
     .menu-btn-content ul {
         display: flex;

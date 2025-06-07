@@ -39,10 +39,10 @@
 
         <div class="menu-btn">
             <i class="fas fa-bars open-menu"></i>
-            <i class="fas fa-times close-menu"></i>
+            <i class="fas fa-times close-menu hidden"></i>
         </div>
 
-        <div class="menu-btn-content">
+        <div class="menu-btn-content hidden">
             <ul>
                 <li>
                     <a href="/ukBlog">
@@ -72,7 +72,7 @@
         <h1>Landing</h1>
     </section>
 
-    <script src="public/assets/js/landing.js"></script>
+    <script src="/ukBlog/public/assets/js/landing.js"></script>
 </body>
 
 </html>
