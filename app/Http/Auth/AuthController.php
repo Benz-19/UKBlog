@@ -2,6 +2,9 @@
 
 namespace App\Http\Auth;
 
+require_once __DIR__ . "/../../../vendor/autoload.php";
+require_once __DIR__ . '/../../../bootstrap.php';
+
 use App\Models\DB;
 use PDOException;
 
@@ -16,11 +19,12 @@ class AuthController
 
     public function login($email)
     {
+        $t = new DB();
         try {
             $query = "SELECT * FROM users WHERE email=:e";
             $params = [':e' => $email];
 
-            $result = $this->db->getSingleData($query, $params);
+            $result = $t->getSingleData($query, $params);
 
             if ($result === null) {
                 $this->db->closeConnection();
@@ -29,7 +33,7 @@ class AuthController
                 return $result;
             }
         } catch (PDOException $e) {
-            error_log("Database error in AuthConrtoller::login.");
+            error_log("Database error in AuthConrtoller::login. Error Type " . $e->getMessage());
         }
         return null;
     }

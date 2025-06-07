@@ -1,3 +1,18 @@
+<?php
+
+use App\Models\DB;
+
+$db = new DB();
+
+$result = $db->getSingleData("SELECT * FROM users WHERE
+                            user_type=:admin", [':admin' => 'admin']);
+
+if ($result !== null) {
+} else {
+    echo "no";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +26,7 @@
 <body>
     <section class="login-container">
         <h1>Login</h1>
-        <form action="/ukBlog/login-1" method="post">
+        <form action="/ukBlog/login" method="post">
             <div class="email-info">
                 <label for="email">email</label>
                 <input type="text" name="email" />
