@@ -15,7 +15,7 @@
             <li>
                 <a href="/ukBlog">
                     <h3 class="logo">
-                        myBlog
+                        ukBlog
                     </h3>
                 </a>
             </li>
@@ -23,7 +23,7 @@
                 <a href="/ukBlog">
                     <li>Home</li>
                 </a>
-                <a href="/ukBlog">
+                <a href="/ukBlog/about">
                     <li>About</li>
                 </a>
             </div>
@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/ukBlog">
+                    <a href="/ukBlog/about">
                         About
                     </a>
                 </li>

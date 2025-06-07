@@ -14,11 +14,12 @@ class AuthController
         $this->db = $db->connection();
     }
 
-    public function login($email, $password)
+    public function login($email)
     {
         try {
             $query = "SELECT * FROM users WHERE email=:e";
             $params = [':e' => $email];
+
             $result = $this->db->getSingleData($query, $params);
 
             if ($result === null) {
