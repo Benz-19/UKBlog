@@ -1,8 +1,17 @@
 <?php
 
+use App\Core\BaseController;
 use App\Http\Auth\AuthController;
 use App\Http\Controllers\UserController;
 use CustomRouter\Route;
+
+// Landing page
+Route::get('/ukBlog/', function () {
+    $landing = new BaseController();
+    $landing->renderView('landing');
+});
+
+
 
 Route::get('/ukBlog/contact', function () {
     echo "New route test";
