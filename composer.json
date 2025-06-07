@@ -10,6 +10,7 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "ukingsley/customrouter": "^1.0"
+        "ukingsley/customrouter": "^1.0",
+        "vlucas/phpdotenv": "^5.6"
     }
 }

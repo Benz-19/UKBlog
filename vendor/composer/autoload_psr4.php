@@ -6,7 +6,13 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
+    'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'Hp\\UkBlog\\' => array($baseDir . '/src'),
-    'CustomRouter\\' => array($vendorDir . '/ukingsley/customrouter/src'),
-    'App\\' => array($vendorDir . '/ukingsley/customrouter/app'),
+    'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
+    'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
+    'CustomRouter\\' => array($baseDir . '/src', $vendorDir . '/ukingsley/customrouter/src'),
+    'App\\' => array($baseDir . '/app', $vendorDir . '/ukingsley/customrouter/app'),
 );
