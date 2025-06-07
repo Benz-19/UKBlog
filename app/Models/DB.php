@@ -12,7 +12,7 @@ class DB
 
     public function __construct()
     {
-        $config = require_once __DIR__ . '/config/database.php';
+        $config = require_once __DIR__ . '/../../config/database.php';
         try {
             $dsn = "mysql:host={$config['host']};dbname={$config['dbname']};port={$config['port']};charset={$config['charset']}";
 

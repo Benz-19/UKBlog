@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Auth\AuthController;
+use App\Http\Controllers\UserController;
 use CustomRouter\Route;
 
 Route::get('/ukBlog/contact', function () {
@@ -33,3 +34,9 @@ Route::post('/ukBlog/login', function () {
         }
     }
 });
+
+// Admin
+Route::get('/ukBlog/admin/dashboard', [UserController::class, 'dashboard']);
+
+// client
+Route::get('/ukBlog/client/dashboard', [UserController::class, 'dashboard']);
