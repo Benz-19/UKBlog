@@ -8,6 +8,7 @@ use CustomRouter\Route;
 
 // Landing page
 Route::get('/ukBlog/', function () {
+    $_SESSION['user_status'] = ''; // will determine if a user is signed in or not
     $landing = new BaseController();
     $landing->renderView('/pages/landing');
 });
@@ -49,6 +50,7 @@ Route::post('/ukBlog/login', function () {
                 $_SESSION['username'] = $login_user['username'];
                 $_SESSION['email'] = $login_user['email'];
                 $_SESSION['user_type'] = $login_user['user_type'];
+                $_SESSION['user_status'] = 'logged-in';
 
 
                 if ($_SESSION['user_type'] === 'admin') {

@@ -15,14 +15,20 @@
                  <li>About</li>
              </a>
          </div>
-         <div class="top-btn">
-             <a href="/ukBlog/login">
-                 <button class="login">Login</button>
-             </a>
-             <a href="/ukBlog/register">
-                 <button class="register">register</button>
-             </a>
-         </div>
+
+         <?php if ($_SESSION['user_status'] !== 'logged-in'): ?>
+             <div class="top-btn">
+                 <a href="/ukBlog/login">
+                     <button class="login">Login</button>
+                 </a>
+                 <a href="/ukBlog/register">
+                     <button class="register">Register</button>
+                 </a>
+             </div>
+         <?php else: ?>
+             <div class="fas fa-user"></div>
+         <?php endif; ?>
+
      </ul>
 
      <div class="menu-btn">
@@ -54,4 +60,5 @@
              </li>
          </ul>
      </div>
+
  </nav>
