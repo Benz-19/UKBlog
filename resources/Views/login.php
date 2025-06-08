@@ -1,18 +1,3 @@
-<?php
-
-use App\Models\DB;
-
-$db = new DB();
-
-$result = $db->getSingleData("SELECT * FROM users WHERE
-                            user_type=:admin", [':admin' => 'admin']);
-
-if ($result !== null) {
-} else {
-    echo "no";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +11,20 @@ if ($result !== null) {
 <body>
     <section class="login-container">
         <h1>Login</h1>
+        <div class="message" style="display: none;">
+            <p class="error">
+                <?php if (isset($_SESSION['error'])): ?>
+                    <?php echo $_SESSION['error']; ?>
+                    <?php unset($_SESSION['error']); ?>
+                <?php endif; ?>
+            </p>
+            <p class="success">
+                <?php if (isset($_SESSION['success'])): ?>
+                    <?php echo $_SESSION['success']; ?>
+                    <?php unset($_SESSION['success']); ?>
+                <?php endif; ?>
+            </p>
+        </div>
         <form action="/ukBlog/login" method="post">
             <div class="email-info">
                 <label for="email">email</label>
@@ -33,12 +32,14 @@ if ($result !== null) {
             </div>
             <div class="paswrd-info">
                 <label for="password">password</label>
-                <input type="text" name="password" />
+                <input type="password" name="password" />
             </div>
             <button type="submit" name="login-btn">Login</button>
             <span>Don't have an account? <a href="/ukBlog/register"><i>register</i></a></span>
         </form>
     </section>
+
+    <script src="/ukBlog/public/assets/js/register.js"></script>
 </body>
 
 </html>

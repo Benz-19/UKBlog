@@ -69,6 +69,38 @@ Route::post('/ukBlog/login', function () {
     }
 });
 
+
+Route::post('/ukBlog/register', function () {
+    if (!isset($_POST['register-btn'])) {
+        $_SESSION['error'] = 'Ensure all fields are filled...';
+        header('Location: /ukBlog/register');
+        exit;
+    } else {
+        if (!isset($_POST['username']) || !isset($_POST['email']) || !isset($_POST['password'])) {
+            $_SESSION['error'] = 'Ensure all fields are filled...';
+        } else {
+            $user = new UserController();
+            $user_type = 'client';
+
+            // Verify if the user exists
+            $result = $user->isUser((string)$_POST['email'], (string)$_POST['password']);
+            if ($result) {
+                // Message to display if user exists
+                $_SESSION['error'] = 'User already exists...';
+            } else {
+                // create a new user if not exists
+                if ($user->register($_POST['username'], $_POST['email'], $_POST['password'], $user_type)) {
+                    $_SESSION['success'] = 'Account created successfully!';
+                } else {
+                    $_SESSION['error'] = 'Failed to create this account';
+                }
+            }
+        }
+        header('Location: /ukBlog/register');
+        exit;
+    }
+});
+
 // Admin
 Route::get('/ukBlog/admin/dashboard', [UserController::class, 'dashboard']);
 
