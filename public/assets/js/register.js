@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             message.style.display = 'none';
-            href.window.location = '/ukBlog/register';
         }, 6000);
     }
 
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             message.style.display = 'none';
-            href.window.location = '/ukBlog/register';
         }, 6000);
     }
 });

@@ -9,7 +9,7 @@ use CustomRouter\Route;
 // Landing page
 Route::get('/ukBlog/', function () {
     $landing = new BaseController();
-    $landing->renderView('landing');
+    $landing->renderView('/pages/landing');
 });
 
 
@@ -22,13 +22,13 @@ Route::get('/ukBlog/about', function () {
 // register user
 Route::get('/ukBlog/register', function () {
     $controller = new BaseController();
-    $controller->renderView('register');
+    $controller->renderView('/auth/register');
 });
 
 // Login Auth
 Route::get('/ukBlog/login', function () {
     $controller = new BaseController();
-    $controller->renderView('login');
+    $controller->renderView('/auth/login');
 });
 
 Route::post('/ukBlog/login', function () {
