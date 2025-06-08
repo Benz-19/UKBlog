@@ -3,6 +3,7 @@
 use App\Core\BaseController;
 use App\Http\Auth\AuthController;
 use App\Http\Controllers\UserController;
+use App\Services\MessageService;
 use CustomRouter\Route;
 
 // Landing page
@@ -39,7 +40,7 @@ Route::post('/ukBlog/login', function () {
         $login_user = $user->login($email);
 
         if ($login_user === null) {
-            $_SESSION['error'] = 'user does not exists';
+            MessageService::message('error', 'user does not exists');
             header('Location: /ukBlog/login');
             exit;
         } else {
@@ -49,9 +50,7 @@ Route::post('/ukBlog/login', function () {
                 $_SESSION['email'] = $login_user['email'];
                 $_SESSION['user_type'] = $login_user['user_type'];
 
-                echo "<pre>";
-                print_r($login_user);
-                echo "</pre>";
+
                 if ($_SESSION['user_type'] === 'admin') {
                     header('Location: /ukBlog/admin/dashboard'); // Redirect to admin dashboard
                     exit;
@@ -61,13 +60,13 @@ Route::post('/ukBlog/login', function () {
                 }
             } else {
                 // TODO
-                $_SESSION['error'] = 'invalid credentials...';
+                MessageService::message('error', 'invalid credentials...');
                 header('Location: /ukBlog/login');
                 exit;
             }
         }
     } else {
-        $_SESSION['error'] = 'Ensure all fields are filled';
+        MessageService::message('error',  'Ensure all fields are filled');
         header('Location: /ukBlog/login');
         exit;
     }
@@ -76,12 +75,12 @@ Route::post('/ukBlog/login', function () {
 // Register a new user
 Route::post('/ukBlog/register', function () {
     if (!isset($_POST['register-btn'])) {
-        $_SESSION['error'] = 'Ensure all fields are filled...';
+        MessageService::message('error',  'Ensure all fields are filled...');
         header('Location: /ukBlog/register');
         exit;
     } else {
         if (!isset($_POST['username']) || !isset($_POST['email']) || !isset($_POST['password'])) {
-            $_SESSION['error'] = 'Ensure all fields are filled...';
+            MessageService::message('error',  'Ensure all fields are filled...');
         } else {
             $user = new UserController();
             $user_type = 'client';
@@ -90,13 +89,13 @@ Route::post('/ukBlog/register', function () {
             $result = $user->isUser((string)$_POST['email'], (string)$_POST['password']);
             if ($result) {
                 // Message to display if user exists
-                $_SESSION['error'] = 'User already exists...';
+                MessageService::message('error', 'User already exists...');
             } else {
                 // create a new user if not exists
                 if ($user->register($_POST['username'], $_POST['email'], $_POST['password'], $user_type)) {
-                    $_SESSION['success'] = 'Account created successfully!';
+                    MessageService::message('success', 'Account created successfully!');
                 } else {
-                    $_SESSION['error'] = 'Failed to create this account';
+                    MessageService::message('error',  'Failed to create this account');
                 }
             }
         }
