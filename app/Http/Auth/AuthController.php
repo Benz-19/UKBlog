@@ -20,6 +20,7 @@ class AuthController
     public function login($email)
     {
         $t = new DB();
+        $this->db = $t;
         try {
             $query = "SELECT * FROM users WHERE email=:e";
             $params = [':e' => $email];

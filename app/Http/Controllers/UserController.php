@@ -53,10 +53,10 @@ class UserController extends BaseController
             $query = "INSERT INTO users(username, email, password, user_type) VALUES (:uname, :email, :pass, :uTyp)";
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $params = [
-                ':uname' => $username,
-                'email' => $email,
+                ':uname' => strtolower(trim($username)),
+                'email' => strtolower(trim($email)),
                 ':pass' => $hashed_password,
-                ':uTyp' => $user_type
+                ':uTyp' => strtolower(trim($user_type))
             ];
 
             $this->db->execute($query, $params);

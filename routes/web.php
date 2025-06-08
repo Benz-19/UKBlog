@@ -34,16 +34,17 @@ Route::post('/ukBlog/login', function () {
     $user = new AuthController();
 
     if (isset($_POST['login-btn'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email = strtolower(trim($_POST['email']));
+        $password = trim($_POST['password']);
         $login_user = $user->login($email);
-
-        echo $password;
 
         if ($login_user === null) {
             $_SESSION['error'] = 'user does not exists';
+            header('Location: /ukBlog/login');
+            exit;
         } else {
-            if ($email === $login_user['email'] && $password === $login_user['password']) {
+
+            if ($email === strtolower($login_user['email']) && password_verify($password, $login_user['password'])) {
                 $_SESSION['username'] = $login_user['username'];
                 $_SESSION['email'] = $login_user['email'];
                 $_SESSION['user_type'] = $login_user['user_type'];
@@ -60,16 +61,19 @@ Route::post('/ukBlog/login', function () {
                 }
             } else {
                 // TODO
-                echo "invalid credentials...";
                 $_SESSION['error'] = 'invalid credentials...';
+                header('Location: /ukBlog/login');
+                exit;
             }
         }
     } else {
         $_SESSION['error'] = 'Ensure all fields are filled';
+        header('Location: /ukBlog/login');
+        exit;
     }
 });
 
-
+// Register a new user
 Route::post('/ukBlog/register', function () {
     if (!isset($_POST['register-btn'])) {
         $_SESSION['error'] = 'Ensure all fields are filled...';
