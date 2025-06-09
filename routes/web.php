@@ -119,3 +119,10 @@ Route::get('/ukBlog/admin/dashboard', [UserController::class, 'dashboard']);
 
 // client
 Route::get('/ukBlog/client/dashboard', [UserController::class, 'dashboard']);
+
+// View Posts
+
+Route::get('/ukBlog/view-posts', function () {
+    $controller = new BaseController();
+    $controller->renderView('client/viewPost');
+});
