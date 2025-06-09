@@ -2,9 +2,7 @@
      <ul>
          <li>
              <a href="/ukBlog">
-                 <h3 class="logo">
-                     ukBlog
-                 </h3>
+                 <h3 class="logo">ukBlog </h3>
              </a>
          </li>
          <div class="nav-links">

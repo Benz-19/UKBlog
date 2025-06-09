@@ -7,7 +7,7 @@
 
 nav {
     background-color: whitesmoke;
-    height: 4rem;
+    height: 12rem;
     align-content: center;
     position: sticky;
     top: 0;
@@ -85,6 +85,7 @@ h1 {
     .menu-btn {
         display: block;
         text-align: center;
+        margin: 30px 0;
         margin-left: 40px;
     }
 
@@ -113,5 +114,9 @@ h1 {
 
     .main-container {
         margin-top: 200px;
+    }
+
+    .dash-container {
+        margin-top: 50px;
     }
 }

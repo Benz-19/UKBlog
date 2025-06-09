@@ -93,7 +93,7 @@
     <?php require __DIR__ . '/../layouts/header.php'; ?>
 
     <!-- Content -->
-    <section>
+    <section class="dash-container">
         <h1>Welcome <?php echo ucfirst($_SESSION['username']); ?></h1>
 
         <div class="container">
@@ -121,6 +121,8 @@
     <?php require __DIR__ . '/../layouts/footer.php'; ?>
 
     <script src="/ukBlog/public/assets/js/header.js"></script>
+    <script src="/ukBlog/public/assets/js/styles.js"></script>
+
     <script>
         document.getElementById("blogForm").addEventListener("submit", function(e) {
             e.preventDefault();

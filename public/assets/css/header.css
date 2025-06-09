@@ -13,9 +13,8 @@
 /* Dropdown container */
 .user-option {
     position: absolute;
-    top: 60px;
-    /* adjust based on your navbar height */
-    right: 10px;
+    top: 130px;
+    right: 60px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -23,7 +22,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     width: 180px;
-    display: none;
 }
 
 /* Show/Hide toggle class */

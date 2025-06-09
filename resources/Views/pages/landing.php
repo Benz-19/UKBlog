@@ -23,7 +23,7 @@
     <!-- Footer -->
     <?php require __DIR__ . '/../layouts/footer.php'; ?>
 
-    <script src="/ukBlog/public/assets/js/landing.js"></script>
+    <script src="/ukBlog/public/assets/js/styles.js"></script>
 </body>
 
 </html>
