@@ -13,12 +13,6 @@ Route::get('/ukBlog/', function () {
         $_SESSION['user_status'] = ''; // will determine if a user is signed in or not
         $landing->renderView('/pages/landing');
     }
-
-    if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'client') {
-        $landing->renderView('client/dashboard');
-    } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
-        $landing->renderView('admin/dashboard');
-    }
 });
 
 
@@ -55,6 +49,7 @@ Route::post('/ukBlog/login', function () {
         } else {
 
             if ($email === strtolower($login_user['email']) && password_verify($password, $login_user['password'])) {
+                $_SESSION['id'] = $login_user['id'];
                 $_SESSION['username'] = $login_user['username'];
                 $_SESSION['email'] = $login_user['email'];
                 $_SESSION['user_type'] = $login_user['user_type'];

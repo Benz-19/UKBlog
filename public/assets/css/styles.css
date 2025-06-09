@@ -75,7 +75,7 @@ h1 {
     display: block;
 }
 
-
+/* Media Queries */
 @media screen and (max-width:700px) {
     nav ul {
         flex-direction: column;
@@ -93,12 +93,6 @@ h1 {
     .top-btn {
         display: none;
     }
-
-    /*
-    .menu-btn-content {
-        display: block;
-
-    } */
 
     .menu-btn-content ul {
         display: flex;
@@ -121,8 +115,7 @@ h1 {
     }
 }
 
-
-/* Posts */
+/* Posts Section */
 .user-posts {
     max-width: 600px;
     margin: 60px auto;
@@ -130,4 +123,56 @@ h1 {
     padding: 30px 40px;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.user-posts,
+.post-container {
+    position: relative;
+}
+
+.user-posts .post-title {
+    position: relative;
+    padding: 10px 0;
+    font-size: 30px;
+    color: black;
+    cursor: pointer;
+}
+
+.user-posts .post-title::after {
+    content: '+';
+    color: black;
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    font-size: 30px;
+    transform: translateY(-50%);
+}
+
+/* Accordion transition */
+.user-posts .post-content {
+    background: white;
+    font-size: 20px;
+    text-align: justify;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+    padding: 0 10px;
+}
+
+/* Active state */
+.user-posts .post-container.active .post-content {
+    max-height: 300px;
+    padding: 10px;
+}
+
+/* Toggle icon */
+.user-posts .post-container.active .post-title::after {
+    content: '-';
+}
+
+/* Horizontal line */
+.user-posts hr {
+    width: 100%;
+    margin-left: 0;
+    border: 1px solid grey;
 }

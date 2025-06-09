@@ -73,4 +73,16 @@ class DB
 
         return $result ?: null; // Return null if no row is found
     }
+
+    public function getAllData(string $query, $params = [])
+    {
+        if (!$this->conn) {
+            throw new PDOException("Database connection not established, failed to retrieve All data.");
+        }
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($params);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result ?: null; // Return null if no row is found
+    }
 }
