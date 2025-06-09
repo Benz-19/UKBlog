@@ -8,9 +8,17 @@ use CustomRouter\Route;
 
 // Landing page
 Route::get('/ukBlog/', function () {
-    $_SESSION['user_status'] = ''; // will determine if a user is signed in or not
     $landing = new BaseController();
-    $landing->renderView('/pages/landing');
+    if ($_SESSION['user_status'] !== 'logged-in') {
+        $_SESSION['user_status'] = ''; // will determine if a user is signed in or not
+        $landing->renderView('/pages/landing');
+    }
+
+    if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'client') {
+        $landing->renderView('client/dashboard');
+    } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
+        $landing->renderView('admin/dashboard');
+    }
 });
 
 

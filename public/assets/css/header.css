@@ -1,4 +1,74 @@
 .user-icon {
-    width: 80px;
-    height: 80px;
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.user-icon i {
+    font-size: 24px;
+    padding: 20px 10px;
+    color: #333;
+}
+
+/* Dropdown container */
+.user-option {
+    position: absolute;
+    top: 60px;
+    /* adjust based on your navbar height */
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 180px;
+    display: none;
+}
+
+/* Show/Hide toggle class */
+.hide {
+    display: none;
+}
+
+/* Dropdown list styles */
+.user-option ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Each list item */
+.user-option ul li {
+    text-decoration: underline;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for the li */
+.user-option ul li:hover {
+    transform: translateX(5px);
+}
+
+/* Link styles */
+.user-option ul a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for the links */
+.user-option ul a:hover {
+    transform: translateX(5px);
+    color: gray;
+}
+
+/* Optional: Style icons inside the links */
+.user-option ul a i {
+    margin-right: 8px;
 }

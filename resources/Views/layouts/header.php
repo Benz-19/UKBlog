@@ -26,7 +26,18 @@
                  </a>
              </div>
          <?php else: ?>
-             <div class="fas fa-user"></div>
+             <div class="user-icon">
+                 <i class="fas fa-user"></i>
+             </div>
+
+             <div class="user-option hide">
+                 <ul>
+                     <li><a href="/ukBlog/settings"><i class="fas fa-gear"></i> Settings</a></li>
+                     <li><a href="/ukBlog/view-posts"><i class="fas fa-book"></i> View Posts</a></li>
+                     <li><a href="/ukBlog/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                 </ul>
+             </div>
+
          <?php endif; ?>
 
      </ul>
