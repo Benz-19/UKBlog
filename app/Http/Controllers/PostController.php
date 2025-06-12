@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use PDOException;
 use App\Models\DB;
 use ErrorException;
-use PDOException;
+use App\Core\BaseController;
+use App\Http\Auth\AuthController;
 
 class PostController
 {
@@ -53,5 +55,29 @@ class PostController
             return false;
         }
         return false;
+    }
+    public function viewClientPosts()
+    {
+        // Access control
+        if (!isset($_SESSION['id'])) {
+            header('Location: /ukBlog/login');
+            exit;
+        }
+
+        if ($_SESSION['user_type'] !== 'client') {
+            header('Location: /ukBlog/');
+            exit;
+        }
+
+        $user_id = $_SESSION['id'];
+        $user_posts = $this->getPost($user_id);
+
+        $error_post = '';
+        if (empty($user_posts)) {
+            $error_post = 'No Posts Yet...';
+        }
+
+        // Include the view and pass variables
+        require_once __DIR__ . '/../../../resources/Views/client/viewPost.php';
     }
 }

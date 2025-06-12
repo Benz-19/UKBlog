@@ -1,21 +1,5 @@
 <?php
-
-use App\Http\Controllers\PostController;
-
-if ($_SESSION['user_type'] !== 'client') {
-    header('Location: ukBlog/');
-    exit;
-}
-if (!isset($_SESSION['id'])) {
-    header('Location: ukBlog/login');
-    exit;
-}
-$post = new PostController();
-$user_posts = $post->getPost($_SESSION['id']);
-$user_posts = null;
-if (empty($user_posts) || !isset($user_posts)) {
-    $_SESSION['error'] = 'No Posts Yet...';
-}
+$counter = 0;
 ?>
 
 <!DOCTYPE html>
@@ -29,39 +13,54 @@ if (empty($user_posts) || !isset($user_posts)) {
     <link rel="stylesheet" href="/ukBlog/public/assets/css/header.css">
     <link rel="stylesheet" href="/ukBlog/public/assets/css/auth.css">
 
-    <title>Document</title>
+    <title>View Post</title>
 </head>
 
 <body>
     <!-- Header -->
     <?php require __DIR__ . '/../layouts/header.php'; ?>
 
-    <section class="user-posts">
-        <h1>Your Posts</h1>
-        <hr>
-        <div class="message" style="display: none;">
-            <p class="error">
-                <?php if (isset($_SESSION['error'])): ?>
-                    <?php echo $_SESSION['error']; ?>
-                    <?php unset($_SESSION['error']); ?>
-                <?php endif; ?>
-            </p>
-            <p class="success">
-                <?php if (isset($_SESSION['success'])): ?>
-                    <?php echo $_SESSION['success']; ?>
-                    <?php unset($_SESSION['success']); ?>
-                <?php endif; ?>
-            </p>
-        </div>
-        <div class="post-container">
-            <div class="post-title">Hello</div>
-            <div class="post-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt aspernatur, fugit at officiis nihil. Eveniet sint illum deserunt repellat! Eligendi ut cum in omnis facilis libero amet, nam numquam?</div>
-        </div>
-        <hr>
-    </section>
+    <div class="wrapper">
+        <section class="user-posts">
+            <h1>Your Posts</h1>
+            <hr>
+            <?php if (isset($_SESSION['error']) || isset($_SESSION['success'])): ?>
+                <div class="message" style="display: block;">
+                    <?php if (isset($_SESSION['error'])): ?>
+                        <p class="error"><?php echo htmlspecialchars($_SESSION['error']); ?></p>
+                        <?php unset($_SESSION['error']); ?>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['success'])): ?>
+                        <p class="success"><?php echo htmlspecialchars($_SESSION['success']); ?></p>
+                        <?php unset($_SESSION['success']); ?>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
 
-    <!-- Footer -->
-    <?php require __DIR__ . '/../layouts/footer.php'; ?>
+            <?php if (!empty($error_post)): ?>
+                <div style="font-size: xx-large;"><?php echo htmlspecialchars($error_post); ?></div>
+            <?php else: ?>
+                <?php foreach ($user_posts as $post): ?>
+                    <?php $counter++; ?>
+                    <div class="post-container">
+                        <div class="post-title"><?php echo $counter . ') ' . htmlspecialchars($post['post_title'], ENT_QUOTES, 'UTF-8'); ?></div>
+                        <div class="post-content">
+                            <?php echo htmlspecialchars($post['post_body'], ENT_QUOTES, 'UTF-8'); ?>
+                            <div>
+                                <button class="delete-btn">Delete</button>
+                                <button class="update-btn">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </section>
+
+        <!-- Footer -->
+        <?php require __DIR__ . '/../layouts/footer.php'; ?>
+    </div>
+
 
     <script src="public/assets/js/styles.js"></script>
     <script src="public/assets/js/header.js"></script>

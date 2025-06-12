@@ -24,15 +24,18 @@ Route::get('/ukBlog/about', function () {
 });
 
 
-// User Authentication
+/**
+ *  USER AUTHENTICATION
+ * user could be an admin/client
+ */
 
-// register user
+// register a user
 Route::get('/ukBlog/register', function () {
     $controller = new BaseController();
     $controller->renderView('/auth/register');
 });
 
-// Login Auth
+// Login user
 Route::get('/ukBlog/login', function () {
     $_SESSION['user_status'] = '';
     $controller = new BaseController();
@@ -76,7 +79,6 @@ Route::post('/ukBlog/login', function () {
                     exit;
                 }
             } else {
-                // TODO
                 MessageService::message('error', 'invalid credentials...');
                 header('Location: /ukBlog/login');
                 exit;
@@ -89,7 +91,7 @@ Route::post('/ukBlog/login', function () {
     }
 });
 
-// Register a new user
+// Register a new user (client/admin)
 Route::post('/ukBlog/register', function () {
     if (!isset($_POST['register-btn'])) {
         MessageService::message('error',  'Ensure all fields are filled...');
@@ -121,19 +123,23 @@ Route::post('/ukBlog/register', function () {
     }
 });
 
-// Admin
+/**
+ * Admin FUNCTIONALITIES
+ */
+
+// route to admin dashboard
 Route::get('/ukBlog/admin/dashboard', [UserController::class, 'dashboard']);
 
-// client
+
+/**
+ * CLIENT FUNCTIONALITIES
+ */
 Route::get('/ukBlog/client/dashboard', [UserController::class, 'dashboard']);
 
-// View Posts
+// View Posts -  client
+Route::get('/ukBlog/view-posts', [PostController::class, 'viewClientPosts']);
 
-Route::get('/ukBlog/view-posts', function () {
-    $controller = new BaseController();
-    $controller->renderView('client/viewPost');
-});
-
+// Creates a new post - client
 Route::post('/ukBlog/create-post', function () {
 
     if (isset($_POST['sendPost'])) {
@@ -159,8 +165,3 @@ Route::post('/ukBlog/create-post', function () {
         MessageService::message('error', 'Failed to send post...');
     }
 });
-
-
-/**
- * This is a test, and it will enable us to determine if the database is functional.
- */

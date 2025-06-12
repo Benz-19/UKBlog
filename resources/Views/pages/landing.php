@@ -15,13 +15,15 @@
     <!-- Header -->
     <?php require __DIR__ . '/../layouts/header.php'; ?>
 
-    <!-- Content -->
-    <section class="main-container">
-        <h1>Landing</h1>
-    </section>
+    <div class="wrapper">
+        <!-- Content -->
+        <section class="main-container">
+            <h1>Landing</h1>
+        </section>
 
-    <!-- Footer -->
-    <?php require __DIR__ . '/../layouts/footer.php'; ?>
+        <!-- Footer -->
+        <?php require __DIR__ . '/../layouts/footer.php'; ?>
+    </div>
 
     <script src="/ukBlog/public/assets/js/styles.js"></script>
 </body>

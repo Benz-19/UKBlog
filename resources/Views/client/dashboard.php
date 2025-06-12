@@ -92,17 +92,19 @@
     <!-- Header -->
     <?php require __DIR__ . '/../layouts/header.php'; ?>
 
-    <!-- Content -->
-    <section class="dash-container">
-        <h1>Welcome <?php echo ucfirst($_SESSION['username']); ?></h1>
+    <div class="wrapper">
+        <!-- Content -->
+        <section class="dash-container">
+            <h1>Welcome <?php echo ucfirst($_SESSION['username']); ?></h1>
 
-        <!-- Create Post section -->
-        <?php require __DIR__ . '/createPost.php'; ?>
+            <!-- Create Post section -->
+            <?php require __DIR__ . '/createPost.php'; ?>
 
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <?php require __DIR__ . '/../layouts/footer.php'; ?>
+        <!-- Footer -->
+        <?php require __DIR__ . '/../layouts/footer.php'; ?>
+    </div>
 
     <script src="/ukBlog/public/assets/js/header.js"></script>
     <script src="/ukBlog/public/assets/js/styles.js"></script>
