@@ -27,7 +27,7 @@ if (empty($user_posts) || !isset($user_posts)) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/ukBlog/public/assets/css/styles.css">
     <link rel="stylesheet" href="/ukBlog/public/assets/css/header.css">
-    <link rel="stylesheet" href="public/assets/css/auth.css">
+    <link rel="stylesheet" href="/ukBlog/public/assets/css/auth.css">
 
     <title>Document</title>
 </head>

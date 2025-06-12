@@ -2,6 +2,7 @@
 
 use App\Core\BaseController;
 use App\Http\Auth\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Services\MessageService;
 use CustomRouter\Route;
@@ -120,4 +121,23 @@ Route::get('/ukBlog/client/dashboard', [UserController::class, 'dashboard']);
 Route::get('/ukBlog/view-posts', function () {
     $controller = new BaseController();
     $controller->renderView('client/viewPost');
+});
+
+Route::post('/ukBlog/create-post', function () {
+
+    if (isset($_POST['title']) && isset($_POST['body'])) {
+        $post = [
+            'author_id' => $_SESSION['id'],
+            'title' => $_POST['title'],
+            'body' => $_POST['body']
+        ];
+
+        $new_post = new PostController();
+        $post_result = $new_post->setPost($post);
+        if ($post_result) {
+            MessageService::message('success', 'Post was successful');
+        }
+    } else {
+        MessageService::message('error', 'title or body was not added to post');
+    }
 });

@@ -28,6 +28,7 @@ class MessageService
             $_SESSION['pending'] = $msg; //for a pending message status
         } else {
             $_SESSION['error'] = $msg;
+            error_log($_SESSION['error']);
         }
     }
 }

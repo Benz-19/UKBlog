@@ -31,9 +31,12 @@ class PostController
             ];
 
             $this->db->execute($query, $params);
+            return true;
         } catch (PDOException $error) {
             error_log('Failed to insert a new post at PostController::setPost method. Error Type: ' . $error->getMessage());
+            return false;
         }
+        return false;
     }
 
     public function getPost($author_id)
