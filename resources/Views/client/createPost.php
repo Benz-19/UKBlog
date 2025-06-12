@@ -1,5 +1,5 @@
 <div class="container">
-    <form id="blogForm">
+    <form action="/ukBlog/create-post" method="POST" id="blogForm">
         <h2>Create a New Blog Post</h2>
         <div class="message" style="display: none;">
             <p class="error">
@@ -19,13 +19,15 @@
         <input type="text" id="title" name="title" placeholder="Enter post title" required />
 
         <label for="content">Content</label>
-        <textarea id="content" name="content" rows="6" placeholder="Write your post..." required></textarea>
+        <textarea id="content" name="body" rows="6" placeholder="Write your post..." required></textarea>
 
         <label for="image">Cover Image (optional)</label>
         <input type="file" id="image" name="image" accept="image/*" />
 
-        <button type="submit">Publish</button>
+        <button type="submit" name="sendPost">Publish</button>
 
         <p class="message" id="formMessage"></p>
     </form>
 </div>
+
+for

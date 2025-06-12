@@ -125,19 +125,31 @@ Route::get('/ukBlog/view-posts', function () {
 
 Route::post('/ukBlog/create-post', function () {
 
-    if (isset($_POST['title']) && isset($_POST['body'])) {
-        $post = [
-            'author_id' => $_SESSION['id'],
-            'title' => $_POST['title'],
-            'body' => $_POST['body']
-        ];
+    if (isset($_POST['sendPost'])) {
 
-        $new_post = new PostController();
-        $post_result = $new_post->setPost($post);
-        if ($post_result) {
-            MessageService::message('success', 'Post was successful');
+        if (isset($_POST['title']) && isset($_POST['body'])) {
+            $post = [
+                'author_id' => $_SESSION['id'],
+                'title' => $_POST['title'],
+                'body' => $_POST['body']
+            ];
+
+            $new_post = new PostController();
+            $post_result = $new_post->setPost($post);
+            if ($post_result) {
+                MessageService::message('success', 'Post was successful');
+                header('Location: /ukBlog/client/dashboard');
+                exit;
+            }
+        } else {
+            MessageService::message('error', 'title or body was not added to post');
         }
     } else {
-        MessageService::message('error', 'title or body was not added to post');
+        MessageService::message('error', 'Failed to send post...');
     }
 });
+
+
+/**
+ * This is a test, and it will enable us to determine if the database is functional.
+ */

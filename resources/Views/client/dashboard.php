@@ -107,31 +107,7 @@
     <script src="/ukBlog/public/assets/js/header.js"></script>
     <script src="/ukBlog/public/assets/js/styles.js"></script>
 
-    <script>
-        document.getElementById("blogForm").addEventListener("submit", function(e) {
-            e.preventDefault();
 
-            const title = document.getElementById("title").value.trim();
-            const content = document.getElementById("content").value.trim();
-            const message = document.getElementById("formMessage");
-
-            if (title === "" || content === "") {
-                message.style.color = "red";
-                message.textContent = "Title and content are required!";
-                return;
-            }
-
-            // Simulate a successful publish
-            message.style.color = "green";
-            message.textContent = "Blog post published successfully!";
-
-            // Clear form after submission
-            setTimeout(() => {
-                this.reset();
-                message.textContent = "";
-            }, 3000);
-        });
-    </script>
 </body>
 
 </html>
