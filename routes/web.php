@@ -10,6 +10,7 @@ use CustomRouter\Route;
 // Landing page
 Route::get('/ukBlog/', function () {
     $landing = new BaseController();
+    $_SESSION['user_status'] = '';
     if ($_SESSION['user_status'] !== 'logged-in') {
         $_SESSION['user_status'] = ''; // will determine if a user is signed in or not
         $landing->renderView('/pages/landing');
@@ -23,6 +24,8 @@ Route::get('/ukBlog/about', function () {
 });
 
 
+// User Authentication
+
 // register user
 Route::get('/ukBlog/register', function () {
     $controller = new BaseController();
@@ -31,10 +34,18 @@ Route::get('/ukBlog/register', function () {
 
 // Login Auth
 Route::get('/ukBlog/login', function () {
+    $_SESSION['user_status'] = '';
     $controller = new BaseController();
     $controller->renderView('/auth/login');
 });
 
+// logout Auth
+Route::get('/ukBlog/logout', function () {
+    $controller = new BaseController();
+    $controller->renderView('/auth/logout');
+});
+
+// Login user
 Route::post('/ukBlog/login', function () {
     $user = new AuthController();
 
@@ -136,8 +147,8 @@ Route::post('/ukBlog/create-post', function () {
 
             $new_post = new PostController();
             $post_result = $new_post->setPost($post);
+            MessageService::message('success', 'Post was successful');
             if ($post_result) {
-                MessageService::message('success', 'Post was successful');
                 header('Location: /ukBlog/client/dashboard');
                 exit;
             }

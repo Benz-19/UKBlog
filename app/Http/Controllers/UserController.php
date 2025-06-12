@@ -73,7 +73,8 @@ class UserController extends BaseController
     {
         if (!isset($_SESSION['user_type'])) {
             http_response_code(403);
-            echo "Unauthorized access.";
+            header('Location: /ukBlog/');
+            exit;
             return;
         }
 
