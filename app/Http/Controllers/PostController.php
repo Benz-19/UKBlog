@@ -56,6 +56,8 @@ class PostController
         }
         return false;
     }
+
+    // Displays the client post(s) if exists
     public function viewClientPosts()
     {
         // Access control
