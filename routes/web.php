@@ -139,6 +139,16 @@ Route::get('/ukBlog/client/dashboard', [UserController::class, 'dashboard']);
 // View Posts -  client
 Route::get('/ukBlog/view-posts', [PostController::class, 'viewClientPosts']);
 
+/**
+ * TODO: ADD the id for the posts so that you can capture it to determine
+ *       which post to delete or update
+ */
+// Delete Posts -  client
+Route::get('/ukBlog/view-posts', [PostController::class, 'viewClientPosts']);
+
+// Update Posts -  client
+Route::get('/ukBlog/view-posts', [PostController::class, 'viewClientPosts']);
+
 // Creates a new post - client
 Route::post('/ukBlog/create-post', function () {
 
