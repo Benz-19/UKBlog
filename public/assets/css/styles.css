@@ -209,3 +209,8 @@ h1 {
     flex-direction: column;
     min-height: 100vh;
 }
+
+/* Post handler */
+.post_handler {
+    text-align: start;
+}

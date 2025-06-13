@@ -80,12 +80,68 @@ class PostController
         }
 
         // Include the view and pass variables
-        require_once __DIR__ . '/../../../resources/Views/client/viewPost.php';
+        require __DIR__ . '/../../../resources/Views/client/viewPost.php';
     }
 
     // Delete the client post(s) if exists
     public function deleteClientPosts()
     {
-        $url = $_SERVER['REQUEST_URI'];
+        if (!isset($_GET['id'])) {
+            $_SESSION['post_handler'] = 'Failed to delete post...';
+            header('Location: /ukBlog/view-posts');
+            exit;
+        } else {
+            try {
+                $delete_post_id = $_GET['id'];
+                $db = new DB();
+                $query = "DELETE FROM posts WHERE id=:id";
+                $params = [":id" => $delete_post_id];
+                $db->execute($query, $params);
+                $_SESSION['post_handler'] = 'Successfully deleted the post...';
+                header('Location: /ukBlog/view-posts');
+                exit;
+                (new BaseController())->renderView('client/viewPost');
+            } catch (PDOException $e) {
+                error_log('Failed to delete client post at PostController::deleteClientPosts. ErrorType = ' . $e->getMessage());
+                $_SESSION['post_handler'] = 'Something went wrong!!!';
+                header('Location: /ukBlog/view-posts');
+                exit;
+            }
+        }
+    }
+
+    //Update the client post(s) if exists
+    public function updateClientPosts()
+    {
+        if (!isset($_GET['id'])) {
+            $_SESSION['post_handler'] = 'Failed to update post...';
+            header('Location: /ukBlog/view-posts');
+            exit;
+        }
+
+        try {
+            $db = new DB();
+            $update_post_id = $_GET['id'];
+            $query = "SELECT * FROM posts WHERE id=:id";
+            $params = [':id' => $update_post_id];
+            $result = $db->getSingleData($query, $params);
+
+            if (empty($result)) {
+                $_SESSION['post_handler'] = 'No data was reteived to update';
+                header('Location: /ukBlog/view-posts');
+                exit;
+            }
+
+            $body = $result['post_body'];
+            $title = $result['post_title'];
+            $_SESSION['post_handler'] = 'Updated the post successfully!';
+            header('Location: /ukBlog/update-post');
+            exit;
+        } catch (PDOException $e) {
+            error_log('Failed to update client posts at PostController::updateClientPosts. ErrorType = ' . $e->getMessage());
+            $_SESSION['post_handler'] = 'Something went wrong!!!';
+            header('Location: /ukBlog/view-posts');
+            exit;
+        }
     }
 }

@@ -85,7 +85,7 @@
             color: green;
         }
     </style>
-    <title>Client Dashboard</title>
+    <title>Update Post</title>
 </head>
 
 <body>
@@ -97,8 +97,15 @@
         <section class="dash-container">
             <h1>Welcome <?php echo ucfirst($_SESSION['username']); ?></h1>
 
-            <!-- Create Post section -->
-            <?php require __DIR__ . '/createPost.php'; ?>
+            <div>
+                <?php if (!isset($_SESSION['update_post'])): ?>
+                    <!-- Create Post section -->
+                    <?php require __DIR__ . '/createPost.php'; ?>
+                <?php else: ?>
+                    <!-- Update Post section-->
+                    <?php require __DIR__ . '/updatePost.php'; ?>
+                <?php endif; ?>
+            </div>
 
         </section>
 
