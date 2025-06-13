@@ -13,6 +13,24 @@ $counter = 0;
     <link rel="stylesheet" href="/ukBlog/public/assets/css/header.css">
     <link rel="stylesheet" href="/ukBlog/public/assets/css/auth.css">
 
+    <style>
+        .button {
+            margin-top: 25px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #0077ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            transition: all 0.7s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: rgba(34, 61, 89, 0.7);
+        }
+    </style>
     <title>View Post</title>
 </head>
 
@@ -22,6 +40,7 @@ $counter = 0;
 
     <div class="wrapper">
         <section class="user-posts">
+            <a href="/ukBlog/client/dashboard"> <button class="button">Return</button></a>
             <h1>Your Posts</h1>
             <hr>
             <?php if (isset($_SESSION['error']) || isset($_SESSION['success'])): ?>

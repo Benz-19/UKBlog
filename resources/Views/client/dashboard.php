@@ -104,6 +104,7 @@
                 <?php else: ?>
                     <!-- Update Post section-->
                     <?php require __DIR__ . '/updatePost.php'; ?>
+                    <?php unset($_SESSION['update_post']); ?>
                 <?php endif; ?>
             </div>
 

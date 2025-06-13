@@ -18,13 +18,13 @@
         <label for="title">Title</label>
         <input type="text" id="title" name="title" value="<?php echo $title; ?>" required />
 
-        <label for="content">Content</label>
-        <textarea id="content" name="body" rows="6" value="<?php echo $body; ?>" required></textarea>
+        <label for="body">Content</label>
+        <textarea id="content" name="body" rows="6" required><?php echo $body; ?></textarea>
 
         <label for=" image">Cover Image (optional)</label>
         <input type="file" id="image" name="image" accept="image/*" />
 
-        <button type="submit" name="updatePost">Publish</button>
+        <button type="submit" name="updatePost">Update Post</button>
 
         <p class="message" id="formMessage"></p>
     </form>

@@ -11,6 +11,12 @@ use App\Http\Auth\AuthController;
 class PostController
 {
     private $db;
+
+    private function getPostID()
+    {
+        return $_GET['id'];
+    }
+
     public function __construct()
     {
         $db = new DB();
@@ -111,19 +117,35 @@ class PostController
     }
 
     //Update the client post(s) if exists
-    public function updateClientPosts()
+    public function updateClientPosts($post = [])
     {
-        var_dump($_SERVER['REQUEST_URI']);
-        var_dump($_GET);
-        exit;
-        if (!isset($_GET['id'])) {
+        try {
+            $db = new DB();
+            $query = "UPDATE posts SET post_title=:title, post_body=:body";
+            $params = [
+                ':title' => $post['title'],
+                ':body' => $post['body']
+            ];
+            $db->execute($query, $params);
+        } catch (PDOException $error) {
+            error_log('Failed to insert the new update into the database. Check PostController::UpdateClientPost. ErrorType = ' . $error->getMessage());
+        }
+    }
+    public function getClientPosts()
+    {
+        $postId = 4;
+        echo $postId;
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
+        if (!isset($postId)) {
             $_SESSION['post_handler'] = 'Failed to update post...';
             header('Location: /ukBlog/view-posts');
             exit;
         } else {
             try {
                 $db = new DB();
-                $update_post_id = $_GET['id'];
+                $update_post_id = $postId;
                 $query = "SELECT * FROM posts WHERE id=:id";
                 $params = [':id' => $update_post_id];
                 $result = $db->getSingleData($query, $params);
@@ -134,11 +156,11 @@ class PostController
                     exit;
                 }
 
-                $body = $result['post_body'];
-                $title = $result['post_title'];
+                $body = htmlspecialchars(trim($result['post_body']));
+                $title = htmlspecialchars(trim($result['post_title']));
                 $_SESSION['post_handler'] = 'Updated the post successfully!';
-                header('Location: /ukBlog/update-post');
-                exit;
+                $_SESSION['update_post'] = true;
+                require_once __DIR__ . '/../../../resources/Views/client/dashboard.php';
             } catch (PDOException $e) {
                 error_log('Failed to update client posts at PostController::updateClientPosts. ErrorType = ' . $e->getMessage());
                 $_SESSION['post_handler'] = 'Something went wrong!!!';
