@@ -144,10 +144,10 @@ Route::get('/ukBlog/view-posts', [PostController::class, 'viewClientPosts']);
  *       which post to delete or update
  */
 // Delete Posts -  client
-Route::get('/ukBlog/view-posts', [PostController::class, 'viewClientPosts']);
+Route::get('/ukBlog/view-posts', [PostController::class, 'deleteClientPosts']);
 
 // Update Posts -  client
-Route::get('/ukBlog/view-posts', [PostController::class, 'viewClientPosts']);
+Route::get('/ukBlog/view-posts', [PostController::class, 'updateClientPosts']);
 
 // Creates a new post - client
 Route::post('/ukBlog/create-post', function () {

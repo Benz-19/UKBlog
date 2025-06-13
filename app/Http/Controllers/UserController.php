@@ -77,11 +77,12 @@ class UserController extends BaseController
             exit;
             return;
         }
-
         $type = $_SESSION['user_type'];
         if ($type === 'admin') {
+            $_SESSION['user_status'] = 'logged-in';
             $this->renderView('admin/dashboard');
         } elseif ($type === 'client') {
+            $_SESSION['user_status'] = 'logged-in';
             $this->renderView('client/dashboard');
         } else {
             http_response_code(404);

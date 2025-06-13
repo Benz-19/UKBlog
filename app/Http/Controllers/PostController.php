@@ -70,7 +70,7 @@ class PostController
             header('Location: /ukBlog/');
             exit;
         }
-
+        $_SESSION['user_status'] = 'logged-in';
         $user_id = $_SESSION['id'];
         $user_posts = $this->getPost($user_id);
 
@@ -81,5 +81,11 @@ class PostController
 
         // Include the view and pass variables
         require_once __DIR__ . '/../../../resources/Views/client/viewPost.php';
+    }
+
+    // Delete the client post(s) if exists
+    public function deleteClientPosts()
+    {
+        $url = $_SERVER['REQUEST_URI'];
     }
 }
