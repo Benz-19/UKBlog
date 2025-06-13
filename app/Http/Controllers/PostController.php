@@ -113,35 +113,38 @@ class PostController
     //Update the client post(s) if exists
     public function updateClientPosts()
     {
+        var_dump($_SERVER['REQUEST_URI']);
+        var_dump($_GET);
+        exit;
         if (!isset($_GET['id'])) {
             $_SESSION['post_handler'] = 'Failed to update post...';
             header('Location: /ukBlog/view-posts');
             exit;
-        }
+        } else {
+            try {
+                $db = new DB();
+                $update_post_id = $_GET['id'];
+                $query = "SELECT * FROM posts WHERE id=:id";
+                $params = [':id' => $update_post_id];
+                $result = $db->getSingleData($query, $params);
 
-        try {
-            $db = new DB();
-            $update_post_id = $_GET['id'];
-            $query = "SELECT * FROM posts WHERE id=:id";
-            $params = [':id' => $update_post_id];
-            $result = $db->getSingleData($query, $params);
+                if (empty($result)) {
+                    $_SESSION['post_handler'] = 'No data was reteived to update';
+                    header('Location: /ukBlog/view-posts');
+                    exit;
+                }
 
-            if (empty($result)) {
-                $_SESSION['post_handler'] = 'No data was reteived to update';
+                $body = $result['post_body'];
+                $title = $result['post_title'];
+                $_SESSION['post_handler'] = 'Updated the post successfully!';
+                header('Location: /ukBlog/update-post');
+                exit;
+            } catch (PDOException $e) {
+                error_log('Failed to update client posts at PostController::updateClientPosts. ErrorType = ' . $e->getMessage());
+                $_SESSION['post_handler'] = 'Something went wrong!!!';
                 header('Location: /ukBlog/view-posts');
                 exit;
             }
-
-            $body = $result['post_body'];
-            $title = $result['post_title'];
-            $_SESSION['post_handler'] = 'Updated the post successfully!';
-            header('Location: /ukBlog/update-post');
-            exit;
-        } catch (PDOException $e) {
-            error_log('Failed to update client posts at PostController::updateClientPosts. ErrorType = ' . $e->getMessage());
-            $_SESSION['post_handler'] = 'Something went wrong!!!';
-            header('Location: /ukBlog/view-posts');
-            exit;
         }
     }
 }

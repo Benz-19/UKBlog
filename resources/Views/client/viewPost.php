@@ -54,6 +54,7 @@ $counter = 0;
                             <div class="post_handler">
                                 <?php if (isset($_SESSION['post_handler'])): ?>
                                     <p><?php echo $_SESSION['post_handler']; ?></p>
+                                    <p><?php unset($_SESSION['post_handler']); ?></p>
                                 <?php endif; ?>
                             </div>
                         </div>
