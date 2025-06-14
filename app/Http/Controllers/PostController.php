@@ -7,6 +7,7 @@ use PDOException;
 use App\Models\DB;
 use ErrorException;
 use App\Core\BaseController;
+use App\Services\MessageService;
 use App\Http\Auth\AuthController;
 
 class PostController
@@ -57,6 +58,33 @@ class PostController
             return false;
         }
         return false;
+    }
+
+    // Create a new post
+    public function createPost()
+    {
+
+        if (isset($_POST['sendPost'])) {
+
+            if (isset($_POST['title']) && isset($_POST['body'])) {
+                $post = [
+                    'author_id' => $_SESSION['id'],
+                    'title' => $_POST['title'],
+                    'body' => $_POST['body']
+                ];
+
+                $post_result = $this->setPost($post);
+                MessageService::message('success', 'Post was successful');
+                if ($post_result) {
+                    header('Location: /ukBlog/client/dashboard');
+                    exit;
+                }
+            } else {
+                MessageService::message('error', 'title or body was not added to post');
+            }
+        } else {
+            MessageService::message('error', 'Failed to send post...');
+        }
     }
 
     // Displays the client post(s) if exists

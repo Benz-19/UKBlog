@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use PDOException;
 use App\Models\DB;
 use App\Core\BaseController;
-use PDOException;
+use App\Services\MessageService;
 
 class UserController extends BaseController
 {
@@ -47,6 +48,12 @@ class UserController extends BaseController
     }
 
     // Registers a new user
+    public function registerView()
+    {
+        $controller = new BaseController();
+        $controller->renderView('/auth/register');
+    }
+
     public function register($username, $email, $password, $user_type)
     {
         try {
@@ -66,6 +73,37 @@ class UserController extends BaseController
             return false;
         }
         return false;
+    }
+
+    public function processRegister()
+    {
+        if (!isset($_POST['register-btn'])) {
+            MessageService::message('error',  'Ensure all fields are filled...');
+            header('Location: /ukBlog/register');
+            exit;
+        } else {
+            if (!isset($_POST['username']) || !isset($_POST['email']) || !isset($_POST['password'])) {
+                MessageService::message('error',  'Ensure all fields are filled...');
+            } else {
+                $user_type = 'client';
+
+                // Verify if the user exists
+                $result = $this->isUser((string)$_POST['email'], (string)$_POST['password']);
+                if ($result) {
+                    // Message to display if user exists
+                    MessageService::message('error', 'User already exists...');
+                } else {
+                    // create a new user if not exists
+                    if ($this->register($_POST['username'], $_POST['email'], $_POST['password'], $user_type)) {
+                        MessageService::message('success', 'Account created successfully!');
+                    } else {
+                        MessageService::message('error',  'Failed to create this account');
+                    }
+                }
+            }
+            header('Location: /ukBlog/register');
+            exit;
+        }
     }
 
     // Render dashboard

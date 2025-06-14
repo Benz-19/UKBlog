@@ -5,8 +5,10 @@ namespace App\Http\Auth;
 require_once __DIR__ . "/../../../vendor/autoload.php";
 require_once __DIR__ . '/../../../bootstrap.php';
 
-use App\Models\DB;
 use PDOException;
+use App\Models\DB;
+use App\Core\BaseController;
+use App\Services\MessageService;
 
 class AuthController
 {
@@ -17,6 +19,7 @@ class AuthController
         $this->db = $db->connection();
     }
 
+    // Login
     public function login($email)
     {
         $t = new DB();
@@ -37,6 +40,62 @@ class AuthController
             error_log("Database error in AuthConrtoller::login. Error Type " . $e->getMessage());
         }
         return null;
+    }
+
+    public function processLogin()
+    {
+        if (isset($_POST['login-btn'])) {
+            $email = strtolower(trim($_POST['email']));
+            $password = trim($_POST['password']);
+            $login_user = $this->login($email);
+
+            if ($login_user === null) {
+                MessageService::message('error', 'user does not exists');
+                header('Location: /ukBlog/login');
+                exit;
+            } else {
+
+                if ($email === strtolower($login_user['email']) && password_verify($password, $login_user['password'])) {
+                    $_SESSION['id'] = $login_user['id'];
+                    $_SESSION['username'] = $login_user['username'];
+                    $_SESSION['email'] = $login_user['email'];
+                    $_SESSION['user_type'] = $login_user['user_type'];
+                    $_SESSION['user_status'] = 'logged-in';
+
+
+                    if ($_SESSION['user_type'] === 'admin') {
+                        header('Location: /ukBlog/admin/dashboard'); // Redirect to admin dashboard
+                        exit;
+                    } elseif ($_SESSION['user_type'] === 'client') {
+                        header('Location: /ukBlog/client/dashboard'); // Redirect to client dashboard
+                        exit;
+                    }
+                } else {
+                    MessageService::message('error', 'invalid credentials...');
+                    header('Location: /ukBlog/login');
+                    exit;
+                }
+            }
+        } else {
+            MessageService::message('error',  'Ensure all fields are filled');
+            header('Location: /ukBlog/login');
+            exit;
+        }
+    }
+
+    public function loginView()
+    {
+        $_SESSION['user_status'] = '';
+        $controller = new BaseController();
+        $controller->renderView('/auth/login');
+    }
+
+
+    // Logout
+    public function logoutView()
+    {
+        $controller = new BaseController();
+        $controller->renderView('/auth/logout');
     }
 
     public function logout()
