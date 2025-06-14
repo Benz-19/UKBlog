@@ -69,13 +69,13 @@ $counter = 0;
                                 <a href="/ukBlog/delete-post?id=<?= htmlspecialchars($post['id'], ENT_QUOTES, 'UTF-8') ?>"> <button class="delete-btn">Delete</button></a>
                                 <a href="/ukBlog/update-post?id=<?= htmlspecialchars($post['id'], ENT_QUOTES, 'UTF-8') ?>"> <button class="update-btn">Update</button></a>
                             </div>
-                            <!-- Error message -->
-                            <div class="post_handler">
-                                <?php if (isset($_SESSION['post_handler'])): ?>
-                                    <p><?php echo $_SESSION['post_handler']; ?></p>
-                                    <p><?php unset($_SESSION['post_handler']); ?></p>
-                                <?php endif; ?>
-                            </div>
+                        </div>
+                        <!-- Error message -->
+                        <div class="post_handler">
+                            <?php if (isset($_SESSION['post_handler'])): ?>
+                                <p><?php echo $_SESSION['post_handler']; ?></p>
+                                <p><?php unset($_SESSION['post_handler']); ?></p>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <hr>

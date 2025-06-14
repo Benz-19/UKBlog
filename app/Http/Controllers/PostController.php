@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use PDOException;
 use App\Models\DB;
 use ErrorException;
@@ -11,11 +12,6 @@ use App\Http\Auth\AuthController;
 class PostController
 {
     private $db;
-
-    private function getPostID()
-    {
-        return $_GET['id'];
-    }
 
     public function __construct()
     {
@@ -117,6 +113,39 @@ class PostController
     }
 
     //Update the client post(s) if exists
+    public function saveUpdatedPost()
+    {
+        if (!isset($_POST['updatePost'])) {
+            $_SESSION['post_handler'] = 'Failed to update this post...';
+            header('Location: /ukBlog/view-posts');
+            exit;
+        }
+
+        if (empty($_POST['body']) || empty($_POST['title'])) {
+            $_SESSION['post_handler'] = 'Ensure all fields are filled!';
+            header('Location: /ukBlog/create-post');
+            exit;
+        }
+
+        try {
+            $post = [
+                'title' => htmlspecialchars(trim($_POST['title'])),
+                'body' => htmlspecialchars(trim($_POST['body']))
+            ];
+
+            $this->updateClientPosts($post);  // Keep this as a helper
+
+            $_SESSION['post_handler'] = 'Post updated successfully!';
+            header('Location: /ukBlog/view-posts');
+            exit;
+        } catch (Exception $e) {
+            error_log("Error updating post: " . $e->getMessage());
+            $_SESSION['post_handler'] = 'Something went wrong!';
+            header('Location: /ukBlog/view-posts');
+            exit;
+        }
+    }
+
     public function updateClientPosts($post = [])
     {
         try {
@@ -131,13 +160,25 @@ class PostController
             error_log('Failed to insert the new update into the database. Check PostController::UpdateClientPost. ErrorType = ' . $error->getMessage());
         }
     }
+
+    /**
+     * Retrieves a specific post from the database using the post ID passed via GET,
+     * and displays the post data in the update view for editing.
+     *
+     * Sets $_SESSION['update_post'] to true to indicate the update mode,
+     * and loads the client dashboard view with the post's current data.
+     *
+     * If no post ID is provided or the post cannot be found, the user is redirected
+     * back to the post listing page with an error message.
+     *
+     * @return void
+     */
+
     public function getClientPosts()
     {
-        $postId = 4;
+        $postId = $_GET['id'];
         echo $postId;
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
+
         if (!isset($postId)) {
             $_SESSION['post_handler'] = 'Failed to update post...';
             header('Location: /ukBlog/view-posts');
@@ -159,7 +200,7 @@ class PostController
                 $body = htmlspecialchars(trim($result['post_body']));
                 $title = htmlspecialchars(trim($result['post_title']));
                 $_SESSION['post_handler'] = 'Updated the post successfully!';
-                $_SESSION['update_post'] = true;
+                $_SESSION['update_post'] = true;  //handles the state for the user to view the create/update post view
                 require_once __DIR__ . '/../../../resources/Views/client/dashboard.php';
             } catch (PDOException $e) {
                 error_log('Failed to update client posts at PostController::updateClientPosts. ErrorType = ' . $e->getMessage());

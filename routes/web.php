@@ -148,27 +148,7 @@ Route::get('/ukBlog/delete-post', [PostController::class, 'deleteClientPosts']);
 
 // Update Posts -  client
 Route::get('/ukBlog/update-post', [PostController::class, 'getClientPosts']);
-Route::post('/ukBlog/update-post', function () {
-    if (!isset($_POST['updatePost'])) {
-        $_SESSION['post_handler'] = 'failed to update this post...';
-        header('Location: /ukBlog/view-posts');
-        exit;
-    }
-
-    if (!isset($_POST['body']) && !isset($_POST['title'])) {
-        $_SESSION['post_handler'] = 'ensure all fileds are filled!';
-        header('Location: /ukBlog/create-post');
-        exit;
-    } else {
-        $updated_post_obj = new PostController();
-        $post = [
-            'title' => htmlspecialchars(trim($_POST['title'])),
-            'body' => htmlspecialchars(trim($_POST['body'])),
-        ];
-        $updated_post_obj->updateClientPosts($post);
-        header('Location: /ukBlog/view-posts');
-    }
-});
+Route::post('/ukBlog/update-post', [PostController::class, 'saveUpdatedPost']);
 // Creates a new post - client
 Route::post('/ukBlog/create-post', function () {
 
