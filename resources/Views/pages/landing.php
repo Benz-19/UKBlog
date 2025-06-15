@@ -17,9 +17,7 @@
 
     <div class="wrapper">
         <!-- Content -->
-        <section class="main-container">
-            <h1>Landing</h1>
-        </section>
+        <?php require __DIR__ . '/renderPosts.php'; ?>
 
         <!-- Footer -->
         <?php require __DIR__ . '/../layouts/footer.php'; ?>
