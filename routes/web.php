@@ -8,14 +8,7 @@ use App\Services\MessageService;
 use CustomRouter\Route;
 
 // Landing page
-Route::get('/ukBlog/', function () {
-    $landing = new BaseController();
-    $_SESSION['user_status'] = '';
-    if ($_SESSION['user_status'] !== 'logged-in') {
-        $_SESSION['user_status'] = ''; // will determine if a user is signed in or not
-        $landing->renderView('/pages/landing');
-    }
-});
+Route::get('/ukBlog/', [BaseController::class, 'processLanding']);
 
 
 

@@ -63,6 +63,7 @@
         <h1 style="text-align: center; margin-top: 30px;">Landing</h1>
 
         <article class="view-posts">
+            <!-- View available posts -->
             <?php require __DIR__ . '/../posts/displayPosts.php'; ?>
         </article>
     </section>
