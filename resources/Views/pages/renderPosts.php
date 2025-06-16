@@ -60,11 +60,14 @@
                 <button id="next-arrow">&#10095;</button>
             </div>
         </article>
-        <h1 style="text-align: center; margin-top: 30px;">Landing</h1>
 
-        <article class="view-posts">
-            <!-- View available posts -->
-            <?php require __DIR__ . '/../posts/displayPosts.php'; ?>
+        <article class="view-posts-container">
+            <h1 style="text-align: center; margin-top: 30px; text-decoration: underline;">TRENDING POSTS</h1>
+
+            <article class="view-posts">
+                <!-- View available posts -->
+                <?php require __DIR__ . '/../posts/displayPosts.php'; ?>
+            </article>
         </article>
     </section>
 </div>

@@ -22,20 +22,29 @@ class BaseController
 
     public function processLanding()
     {
-        // $landing = new BaseController();
         $_SESSION['user_status'] = '';
+
         if ($_SESSION['user_status'] !== 'logged-in') {
-            $_SESSION['user_status'] = ''; // will determine if a user is signed in or not
-            // $landing->renderView('/pages/landing');
             try {
                 $db = new DB();
-                $query  = "SELECT * FROM posts WHERE id=?";
-                $params = [4];
-                $posts = $db->getAllData($query, $params);
-                $posts;
+
+                $query = "SELECT
+                          posts.id AS post_id,
+                          posts.post_title,
+                          posts.post_body,
+                          posts.created_at,
+                          posts.updated_at,
+                          users.username AS author_name
+                      FROM posts
+                      JOIN users ON posts.author_id = users.id
+                      ORDER BY posts.created_at DESC";
+
+                $posts = $db->getAllData($query);
             } catch (PDOException $error) {
-                error_log('Failed to read the fetch posts at BaseController::processLanding. ErrorType = ' . $error->getMessage());
+                error_log('Failed to fetch posts in BaseController::processLanding. Error: ' . $error->getMessage());
+                $posts = []; // Fallback to empty array if query fails
             }
+
             require __DIR__ . '/../../resources/Views/pages/landing.php';
         }
     }

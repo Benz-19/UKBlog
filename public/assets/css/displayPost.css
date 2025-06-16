@@ -18,6 +18,10 @@
     box-sizing: border-box;
 }
 
+.main-container .view-posts-container {
+    padding: 50px 0;
+}
+
 .slider {
     position: relative;
     width: 100%;
@@ -197,14 +201,23 @@
 
 
 /* Post Cards */
+.view-posts {
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .post-card {
     max-width: 300px;
     height: fit-content;
-    padding: 20px 0;
+    padding: 20px;
     background-color: red;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 4px gray;
 }
 
 .post-card span {
@@ -218,15 +231,33 @@
     text-align: center;
 }
 
+.author-name {
+    width: 100%;
+}
+
+.post-title .post-body {
+    width: 100%;
+}
+
 .post-title {
     margin: 6px 0;
 }
 
 .post-body {
     margin: 6px 0;
+    text-wrap: wrap;
 }
 
 .view-post-btn {
+    margin: 9px 0;
     width: 90px;
     height: 50px;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+}
+
+.view-post-btn:hover {
+    background-color: gray;
 }
