@@ -114,6 +114,7 @@
         <?php require __DIR__ . '/../layouts/footer.php'; ?>
     </div>
 
+    <!-- JS -->
     <script src="/ukBlog/public/assets/js/header.js"></script>
     <script src="/ukBlog/public/assets/js/styles.js"></script>
 

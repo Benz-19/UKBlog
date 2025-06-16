@@ -42,7 +42,7 @@ Route::post('/ukBlog/register', [UserController::class, 'processRegister']);
  */
 
 // route to admin dashboard
-Route::get('/ukBlog/admin/dashboard', [UserController::class, 'dashboard']);
+Route::get('/ukBlog/admin/dashboard', [UserController::class, 'adminDashboard']);
 
 
 /**

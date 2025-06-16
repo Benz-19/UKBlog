@@ -7,6 +7,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/ukBlog/public/assets/css/styles.css">
     <link rel="stylesheet" href="/ukBlog/public/assets/css/header.css">
+    <link rel="stylesheet" href="/ukBlog/public/assets/css/post.css">
+    <link rel="stylesheet" href="/ukBlog/public/assets/css/auth.css">
     <style>
         * {
             box-sizing: border-box;
@@ -93,11 +95,13 @@
     <?php require __DIR__ . '/../layouts/header.php'; ?>
     <div class="wrapper">
         <!-- Content -->
-        <h1>Welcome Admin</h1>
-
+        <?php require __DIR__ . '/posts.php'; ?>
         <!-- Footer -->
         <?php require __DIR__ . '/../layouts/footer.php'; ?>
     </div>
+
+    <!-- JS -->
+    <script src="/ukBlog/public/assets/js/header.js"></script>
 </body>
 
 </html>

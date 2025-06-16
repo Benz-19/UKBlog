@@ -128,8 +128,13 @@ class PostController
                 $params = [":id" => $delete_post_id];
                 $db->execute($query, $params);
                 $_SESSION['post_handler'] = 'Successfully deleted the post...';
-                header('Location: /ukBlog/view-posts');
-                exit;
+                if ($_SESSION['user_type'] === 'client') {
+                    header('Location: /ukBlog/view-posts');
+                    exit;
+                } else {
+                    header('Location: /ukBlog/admin/dashboard');
+                    exit;
+                }
                 (new BaseController())->renderView('client/viewPost');
             } catch (PDOException $e) {
                 error_log('Failed to delete client post at PostController::deleteClientPosts. ErrorType = ' . $e->getMessage());
@@ -164,8 +169,13 @@ class PostController
             $this->updateClientPosts($post);  // Keep this as a helper
 
             $_SESSION['post_handler'] = 'Post updated successfully!';
-            header('Location: /ukBlog/view-posts');
-            exit;
+            if ($_SESSION['user_type'] === 'client') {
+                header('Location: /ukBlog/view-posts');
+                exit;
+            } else {
+                header('Location: /ukBlog/admin/dashboard');
+                exit;
+            }
         } catch (Exception $e) {
             error_log("Error updating post: " . $e->getMessage());
             $_SESSION['post_handler'] = 'Something went wrong!';

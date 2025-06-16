@@ -1,0 +1,45 @@
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+    flex-wrap: wrap;
+}
+
+.num-posts {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin: 6px 0;
+}
+
+.posts-container .single-post {
+    background-color: orange;
+    width: 100%;
+    height: 200px;
+    border: 3px solid black;
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 15px 0;
+}
+
+.posts-container span {
+    font-weight: bold;
+}
+
+.single-post-btn {
+    padding: 0 8px;
+}
+
+.single-post-btn .upt-btn {
+    background-color: green;
+}
+
+.single-post-btn .del-btn {
+    background-color: red;
+}
+
+.single-post-btn button:hover {
+    background-color: gray;
+}

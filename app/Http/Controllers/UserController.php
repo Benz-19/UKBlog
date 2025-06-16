@@ -127,4 +127,35 @@ class UserController extends BaseController
             echo "Dashboard not found.";
         }
     }
+
+    public function adminDashboard()
+    {
+        if ($_SESSION['user_type'] !== 'admin') {
+            $_SESSION['user_status'] = 'logged-in';
+            header('Location: /ukBlog/');
+            exit;
+        } else {
+            $db = new DB();
+            $_SESSION['user_status'] = 'logged-in';
+            try {
+                $query = "SELECT
+                    posts.id AS post_id,
+                    users.username AS author_name,
+                    posts.post_title AS title,
+                    posts.created_at AS created_at,
+                    posts.updated_at AS updated_at
+                    FROM posts
+                    JOIN
+                    users ON posts.author_id = users.id
+                    ORDER BY posts.created_at DESC";
+
+                $posts = $db->getAllData($query);
+            } catch (PDOException $error) {
+                error_log('Failure at render admin dashboard. ErrorType = ' . $error->getMessage());
+                $posts = [];
+            }
+
+            require __DIR__ . '/../../../resources/Views/admin/dashboard.php';
+        }
+    }
 }
