@@ -1,0 +1,196 @@
+.post-landing {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    /* Hide overflow to prevent scrollbars from individual slides */
+}
+
+.main-container {
+    width: 100%;
+    max-width: 1200px;
+    /* Max width for the slider container */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    /* Fixed height for the slider */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.slider .list {
+    display: flex;
+    /* Use flexbox to arrange items horizontally */
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    /* Smooth transition for sliding */
+}
+
+.slider .list .item {
+    min-width: 100%;
+    /* Each item takes full width of the slider */
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    /* Prevent items from shrinking */
+}
+
+.slider .list .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Cover the entire area */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /* Ensure image is behind content */
+}
+
+.slider .list .item .content {
+    position: relative;
+    z-index: 2;
+    /* Content on top of the image */
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background for readability */
+    border-radius: 8px;
+    max-width: 80%;
+    backdrop-filter: blur(5px);
+    /* Optional: Frosted glass effect */
+}
+
+.slider .list .item .content .title {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.slider .list .item .content .type {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.slider .list .item .content .description {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.slider .list .item .content .button button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.slider .list .item .content .button button:hover {
+    background-color: #0056b3;
+}
+
+.nextPrevArrows {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.nextPrevArrows button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    /* Fixed width for circular buttons */
+    height: 40px;
+    /* Fixed height for circular buttons */
+}
+
+.nextPrevArrows button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .slider {
+        height: 400px;
+    }
+
+    .slider .list .item .content .title {
+        font-size: 2em;
+    }
+
+    .slider .list .item .content .type {
+        font-size: 1em;
+    }
+
+    .slider .list .item .content .description {
+        font-size: 0.9em;
+    }
+
+    .nextPrevArrows button {
+        padding: 8px 12px;
+        font-size: 1.2em;
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider {
+        height: 300px;
+    }
+
+    .slider .list .item .content .title {
+        font-size: 1.5em;
+    }
+
+    .slider .list .item .content .type {
+        font-size: 0.8em;
+    }
+
+    .slider .list .item .content .description {
+        font-size: 0.8em;
+        max-width: 90%;
+    }
+
+    .nextPrevArrows button {
+        padding: 6px 10px;
+        font-size: 1em;
+        width: 30px;
+        height: 30px;
+    }
+}

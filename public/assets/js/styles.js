@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeMenu = document.querySelector('.close-menu');
     const menuContent = document.getElementsByClassName('menu-btn-content')[0];
 
+
     if (openMenu) {
         openMenu.addEventListener('click', () => {
             closeMenu.classList.remove('hidden');        // Show the close "X" icon
@@ -37,4 +38,58 @@ document.addEventListener('DOMContentLoaded', () => {
             container.classList.toggle('active');
         });
     });
+
+
+    const sliderList = document.getElementById('slider-list');
+    const items = document.querySelectorAll('.slider .list .item');
+    const prevArrow = document.getElementById('prev-arrow');
+    const nextArrow = document.getElementById('next-arrow');
+
+    let currentIndex = 0;
+    const totalItems = items.length;
+
+    /**
+     * Updates the slider's position to show the current slide.
+     */
+    function updateSliderPosition() {
+        // Calculate the translation needed for the slider list
+        // Each item takes 100% of the slider's width
+        sliderList.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    /**
+     * Moves the slider to the next slide.
+     * Loops back to the first slide if at the end.
+     */
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateSliderPosition();
+    }
+
+    /**
+     * Moves the slider to the previous slide.
+     * Loops to the last slide if at the beginning.
+     */
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        updateSliderPosition();
+    }
+
+    // Add event listeners to the navigation arrows
+    nextArrow.addEventListener('click', nextSlide);
+    prevArrow.addEventListener('click', prevSlide);
+
+    let autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+
+    // Pause auto-slide on hover for better user experience
+    sliderList.parentNode.addEventListener('mouseenter', () => {
+        clearInterval(autoSlideInterval);
+    });
+
+    sliderList.parentNode.addEventListener('mouseleave', () => {
+        autoSlideInterval = setInterval(nextSlide, 5000);
+    });
+
+    // Initialize the slider position
+    updateSliderPosition();
 });
