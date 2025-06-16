@@ -204,11 +204,25 @@
 .view-posts {
     padding: 20px 0;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
+}
+
+.display-posts {
+    display: flex;
     justify-content: center;
 }
 
 .post-card {
+    height: fit-content;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.post-content {
     max-width: 300px;
     height: fit-content;
     padding: 20px;
@@ -218,6 +232,7 @@
     align-items: center;
     justify-content: center;
     box-shadow: 2px 2px 4px gray;
+    margin: 6px;
 }
 
 .post-card span {
@@ -235,12 +250,10 @@
     width: 100%;
 }
 
-.post-title .post-body {
-    width: 100%;
-}
-
-.post-title {
+.post-title,
+.post-body {
     margin: 6px 0;
+    width: 100%;
 }
 
 .post-body {
