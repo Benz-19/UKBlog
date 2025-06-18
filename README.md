@@ -61,7 +61,7 @@ ukBlog is a PHP-based blogging platform that allows users to register, log in, a
     ```
 
 3. **Set up environment variables:**
-    - Copy `.env.example` to `.env` and update database credentials:
+    - basic database credentials:
       ```
       DB_HOST=localhost
       DB_NAME=your_db_name
