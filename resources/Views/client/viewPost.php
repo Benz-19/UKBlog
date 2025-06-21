@@ -67,7 +67,7 @@ $counter = 0;
                             <?php echo htmlspecialchars($post['post_body'], ENT_QUOTES, 'UTF-8'); ?>
                             <div>
                                 <a href="/ukBlog/delete-post?id=<?php echo htmlspecialchars($post['id'], ENT_QUOTES, 'UTF-8'); ?>"> <button class="delete-btn">Delete</button></a>
-                                <a href="/ukBlog/update-post?id=<?php echo htmlspecialchars($post['id'], ENT_QUOTES, 'UTF-8') ?>"> <button class="update-btn">Update</button></a>
+                                <a href="/ukBlog/update-post?id=<?php echo htmlspecialchars($post['id'], ENT_QUOTES, 'UTF-8'); ?>"> <button class="update-btn">Update</button></a>
                             </div>
                         </div>
                         <!-- Error message -->
