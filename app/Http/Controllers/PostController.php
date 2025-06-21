@@ -163,7 +163,8 @@ class PostController
         try {
             $post = [
                 'title' => htmlspecialchars(trim($_POST['title'])),
-                'body' => htmlspecialchars(trim($_POST['body']))
+                'body' => htmlspecialchars(trim($_POST['body'])),
+                'author_id' => htmlspecialchars(trim($_SESSION['id']))
             ];
 
             $this->updateClientPosts($post);  // Keep this as a helper
@@ -186,10 +187,16 @@ class PostController
 
     public function updateClientPosts($post = [])
     {
+        if (!isset($post['author_id'])) {
+            header('Location: /ukBlog/view-posts');
+            exit;
+        }
         try {
             $db = new DB();
-            $query = "UPDATE posts SET post_title=:title, post_body=:body";
+            $author_id = $post['author_id'];
+            $query = "UPDATE posts SET post_title=:title, post_body=:body WHERE author_id=:id";
             $params = [
+                ':id' => $author_id,
                 ':title' => $post['title'],
                 ':body' => $post['body']
             ];
