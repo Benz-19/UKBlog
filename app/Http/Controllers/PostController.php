@@ -187,16 +187,18 @@ class PostController
 
     public function updateClientPosts($post = [])
     {
-        if (!isset($post['author_id'])) {
+        $postId = $_GET['id'];
+        echo $postId;
+        if (!isset($postId)) {
             header('Location: /ukBlog/view-posts');
             exit;
         }
         try {
             $db = new DB();
-            $author_id = $post['author_id'];
-            $query = "UPDATE posts SET post_title=:title, post_body=:body WHERE author_id=:id";
+            $post_id = $_GET['id'];
+            $query = "UPDATE posts SET post_title=:title, post_body=:body WHERE id=:id";
             $params = [
-                ':id' => $author_id,
+                ':id' => $post_id,
                 ':title' => $post['title'],
                 ':body' => $post['body']
             ];

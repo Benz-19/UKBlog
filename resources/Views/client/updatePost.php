@@ -29,5 +29,3 @@
         <p class="message" id="formMessage"></p>
     </form>
 </div>
-
-for
