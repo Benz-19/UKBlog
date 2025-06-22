@@ -221,6 +221,7 @@ class PostController
      * @return void
      */
 
+
     public function getClientPosts()
     {
         $postId = $_GET['id'];
