@@ -164,7 +164,7 @@ class PostController
             $post = [
                 'title' => htmlspecialchars(trim($_POST['title'])),
                 'body' => htmlspecialchars(trim($_POST['body'])),
-                'author_id' => htmlspecialchars(trim($_SESSION['id']))
+                'post_id' => htmlspecialchars(trim($_POST['id']))
             ];
 
             $this->updateClientPosts($post);  // Keep this as a helper
@@ -187,15 +187,14 @@ class PostController
 
     public function updateClientPosts($post = [])
     {
-        $postId = $_GET['id'];
-        echo $postId;
+        $postId = $post['post_id'] ?? null;
         if (!isset($postId)) {
             header('Location: /ukBlog/view-posts');
             exit;
         }
         try {
             $db = new DB();
-            $post_id = $_GET['id'];
+            $post_id = $postId;
             $query = "UPDATE posts SET post_title=:title, post_body=:body WHERE id=:id";
             $params = [
                 ':id' => $post_id,
@@ -245,6 +244,7 @@ class PostController
                     exit;
                 }
 
+                $post_id = htmlspecialchars(trim($result['id']));
                 $body = htmlspecialchars(trim($result['post_body']));
                 $title = htmlspecialchars(trim($result['post_title']));
                 $_SESSION['post_handler'] = 'Updated the post successfully!';

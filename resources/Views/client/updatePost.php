@@ -15,14 +15,15 @@
                 <?php endif; ?>
             </p>
         </div>
+        <input type="hidden" name="id" value="<?php echo $post_id; ?>" required />
         <label for="title">Title</label>
         <input type="text" id="title" name="title" value="<?php echo $title; ?>" required />
 
         <label for="body">Content</label>
         <textarea id="content" name="body" rows="6" required><?php echo $body; ?></textarea>
 
-        <label for=" image">Cover Image (optional)</label>
-        <input type="file" id="image" name="image" accept="image/*" />
+        <!-- <label for=" image">Cover Image (optional)</label>
+        <input type="file" id="image" name="image" accept="image/*" /> -->
 
         <button type="submit" name="updatePost">Update Post</button>
 
